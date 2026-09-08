@@ -1,12 +1,14 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.android.hilt)
 }
 
 android {
     namespace = "com.example.projectdashboardshowcase"
     compileSdk {
-        version = release(36) {
+        version = release(37) {
             minorApiLevel = 1
         }
     }
@@ -14,7 +16,7 @@ android {
     defaultConfig {
         applicationId = "com.example.projectdashboardshowcase"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -38,6 +40,10 @@ android {
 }
 
 dependencies {
+    ksp(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.common)
+    implementation(libs.hilt.android)
+
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
