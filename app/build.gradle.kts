@@ -33,6 +33,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+        isCoreLibraryDesugaringEnabled = true
     }
     buildFeatures {
         compose = true
@@ -40,8 +41,10 @@ android {
 }
 
 dependencies {
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
     ksp(libs.hilt.compiler)
     implementation(libs.androidx.hilt.common)
+    implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.hilt.android)
 
     implementation(platform(libs.androidx.compose.bom))
