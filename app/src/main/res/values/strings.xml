@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ProjectDashboardShowcase</string>
+    <string name="main_page">Главная</string>
+    <string name="app_logo">App Logo</string>
+    <string name="user_avatar">Аватар пользователя</string>
+    <string name="error_loading_user_avatar">Ошибка загрузки аватара</string>
 </resources>
