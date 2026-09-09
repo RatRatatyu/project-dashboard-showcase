@@ -44,7 +44,7 @@ fun MainScreenComponent(
     uiState: MainUiState
 ){
     Scaffold(
-        modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         topBar = { DashboardTopAppBar(userState = uiState.userState) }
     ) {innerPadding ->
         Column(
@@ -61,6 +61,9 @@ fun MainScreenComponent(
 
     }
 }
+
+
+
 
 @Preview(showBackground = true)
 @Composable
