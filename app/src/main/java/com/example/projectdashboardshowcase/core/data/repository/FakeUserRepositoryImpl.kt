@@ -4,13 +4,17 @@ import com.example.projectdashboardshowcase.core.data.datasource.FakeUserDataPro
 import com.example.projectdashboardshowcase.core.domain.model.User
 import com.example.projectdashboardshowcase.core.domain.repository.UserRepository
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds
 
 class FakeUserRepositoryImpl @Inject constructor(): UserRepository {
 
-    override suspend fun getUser(): User {
-        delay(300.milliseconds)
-        return FakeUserDataProvider.getMockUser()
-    }
+    override fun getUser(): Flow<User> =
+        flow{
+            delay(300.milliseconds)
+            emit(FakeUserDataProvider.getMockUser())
+        }
+
 }
