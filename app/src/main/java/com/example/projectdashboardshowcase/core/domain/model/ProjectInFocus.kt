@@ -4,7 +4,7 @@ import java.time.LocalDate
 
 data class ProjectInFocus (
     val id: Int,
-    val imageUrl: String?,
+    val imageUrl: Int?,
     val dueDate: LocalDate,
     val categoryHub: String,
     val name: String,
