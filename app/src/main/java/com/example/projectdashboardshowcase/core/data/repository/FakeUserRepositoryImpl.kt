@@ -8,12 +8,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 
 class FakeUserRepositoryImpl @Inject constructor(): UserRepository {
 
     override fun getUser(): Flow<User> =
         flow{
-            delay(300.milliseconds)
+            delay(5.seconds)
             emit(FakeUserDataProvider.getMockUser())
         }
 
