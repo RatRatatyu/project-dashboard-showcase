@@ -1,5 +1,6 @@
 package com.example.projectdashboardshowcase.core.data.datasource
 
+import com.example.projectdashboardshowcase.R
 import com.example.projectdashboardshowcase.core.domain.model.DashboardData
 import com.example.projectdashboardshowcase.core.domain.model.InfrastructureAndService
 import com.example.projectdashboardshowcase.core.domain.model.ProjectInFocus
@@ -9,15 +10,15 @@ import com.example.projectdashboardshowcase.core.domain.model.User
 import java.time.LocalDate
 
 // Here we fake server feed
-private val userAnna = User(100, "Анна", null)
+private val userAnna = User(100, "Анна", R.drawable.user1)
 private val userAlex = User(120, "Алексей", null)
 private val userMaria = User(138, "Мария", null)
-private val userIvan = User(101, "Иван", null)
-private val userElena = User(102, "Елена", null)
+private val userIvan = User(101, "Иван", R.drawable.user3)
+private val userElena = User(102, "Елена", R.drawable.user2)
 
 private val sharedDesignSystem = InfrastructureAndService(
     id = 10,
-    imageUrl = null,
+    imageUrl = R.drawable.service1,
     name = "Аналитический дашборд v3.2",
     description = "Унификация дата-визуализаций, многоосевых графиков и адаптивных KPI",
     priority = TaskPriority.P1,
@@ -34,7 +35,7 @@ val data: List<DashboardData> = listOf(
         activeSprintCount = 3,
         projectInFocus = ProjectInFocus(
             id = 1,
-            imageUrl = null,
+            imageUrl = R.drawable.projectinfocus1,
             dueDate = LocalDate.now().plusDays(4),
             categoryHub = "Архитектурный хаб • Фронтенд & BIM",
             name = "Реконструкция павильона цифровых инноваций",
