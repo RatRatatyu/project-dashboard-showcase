@@ -17,9 +17,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material.icons.filled.IncompleteCircle
 import androidx.compose.material.icons.filled.InsertChartOutlined
+import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material3.Button
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
@@ -42,8 +42,6 @@ import androidx.compose.ui.zIndex
 import com.example.projectdashboardshowcase.R
 import com.example.projectdashboardshowcase.core.domain.model.User
 import com.example.projectdashboardshowcase.presentation.mainScreen.utils.DefaultUserAvatar
-import kotlin.collections.chunked
-import kotlin.collections.forEach
 import kotlin.math.roundToInt
 
 @Composable
@@ -258,8 +256,8 @@ fun LowerCardPart(
                 shape = RoundedCornerShape(8.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Default.FilterList,
-                    contentDescription = "Поиск по фильтрам"
+                    imageVector = Icons.Default.Tune ,
+                    contentDescription = stringResource(R.string.search_by_filters)
                 )
             }
         }
