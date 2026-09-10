@@ -4,4 +4,18 @@
     <string name="app_logo">App Logo</string>
     <string name="user_avatar">Аватар пользователя</string>
     <string name="error_loading_user_avatar">Ошибка загрузки аватара</string>
+    <string name="loading_profile">Загрузка профиля...</string>
+    <string name="user_greeting">Добрый день, %1$s</string>
+    <string name="error_loading_profile">Не удалось загрузить</string>
+    <string name="active_sprints">%1$d активных спринта</string>
+    <string name="no_active_sprints">Нету активных спринтов</string>
+    <string name="tasks">Задачи</string>
+    <string name="rp_merged">RP merged</string>
+    <string name="blokers">Блокеры</string>
+    <string name="go_to_sprint">Перейти к спринту</string>
+    <string name="sprint_execution">Выполнение спринта</string>
+    <string name="project_end_date">Дата окончания проекта</string>
+    <string name="untill">До %1$d, %2$s (%3$s)</string>
+    <string name="error_mesage">Что-то пошло не так</string>
+    <string name="error">Ошибка\n</string>
 </resources>
