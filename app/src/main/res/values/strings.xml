@@ -19,4 +19,18 @@
     <string name="error_mesage">Что-то пошло не так</string>
     <string name="error">Ошибка\n</string>
     <string name="current_project_in_focus">Текущий проект в фокусе</string>
+
+    <string name="menu_edit">Редактировать</string>
+    <string name="menu_edit_sub">Название и описание</string>
+    <string name="menu_share">Поделиться</string>
+    <string name="menu_share_badge">Копия</string>
+    <string name="menu_members">Участники</string>
+    <string name="menu_members_badge">10 чел.</string>
+    <string name="menu_members_badge_dynamic">%1$d чел.</string>
+    <string name="menu_duplicate">Дублировать</string>
+    <string name="menu_sprint_settings">Настройки спринта</string>
+    <string name="menu_archive">Архивировать</string>
+    <string name="menu_delete">Удалить проект</string>
+    <string name="search_by_filters">Поиск по фильтрам</string>
+    <string name="default_searchbar_text">Поиск по проектам, тикетам и тегам</string>
 </resources>
