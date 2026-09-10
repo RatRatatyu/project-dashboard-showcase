@@ -2,7 +2,7 @@ package com.example.projectdashboardshowcase.core.domain.model
 
 data class InfrastructureAndService(
     val id: Int,
-    val imageUrl: Int?,
+    val imageUrl: Int? = null,
     val name: String,
     val description: String,
     val priority: TaskPriority,
