@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import com.example.projectdashboardshowcase.R
 import com.example.projectdashboardshowcase.core.domain.model.User
 import com.example.projectdashboardshowcase.presentation.mainScreen.UserState
+import com.example.projectdashboardshowcase.presentation.mainScreen.utils.DefaultUserAvatar
 import com.example.projectdashboardshowcase.ui.theme.ProjectDashboardShowcaseTheme
 
 
@@ -41,35 +42,39 @@ fun DashboardTopAppBar(
     modifier: Modifier = Modifier,
     userState: UserState
 ){
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .statusBarsPadding()
-            .height(64.dp)
-            .padding(horizontal = 20.dp),
-        verticalAlignment = Alignment.CenterVertically
+    Surface(
+        modifier = modifier.fillMaxWidth(),
+        color = MaterialTheme.colorScheme.surface,
+        tonalElevation = 3.dp
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.logo),
-            contentDescription = stringResource(R.string.app_logo),
+        Row(
             modifier = Modifier
-                .clip(RoundedCornerShape(8.dp))
-                .size(40.dp)
-        )
+                .fillMaxWidth()
+                .statusBarsPadding()
+                .height(64.dp)
+                .padding(horizontal = 20.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = stringResource(R.string.app_logo),
+                modifier = Modifier
+                    .clip(RoundedCornerShape(8.dp))
+                    .size(40.dp)
+            )
 
-        Text(
-            text = stringResource(R.string.main_page),
-            style = MaterialTheme.typography.titleLarge.copy(
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp
-            ),
-            modifier = Modifier.padding(start = 12.dp)
-        )
+            Text(
+                text = stringResource(R.string.main_page),
+                style = MaterialTheme.typography.titleLarge.copy(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp
+                ),
+                modifier = Modifier.padding(start = 12.dp)
+            )
 
-        Spacer(modifier = Modifier.weight(1f))
-        
-        UserAvatar(userState = userState)
-
+            Spacer(modifier = Modifier.weight(1f))
+            UserAvatar(userState = userState)
+        }
     }
 }
 
@@ -107,7 +112,7 @@ fun UserAvatar(
 
                     )
                 }else{
-                    //TODO(create default user avatar)
+                    DefaultUserAvatar(userName = userState.user.name)
                 }
             }
             is UserState.Error ->
@@ -137,7 +142,7 @@ fun DashboardTopAppBarPreview() {
                 Text("Success", modifier = Modifier.padding(8.dp), style = MaterialTheme.typography.labelSmall)
                 DashboardTopAppBar(
                     modifier = Modifier.height(64.dp).fillMaxWidth(),
-                    userState = UserState.Success(User(1, "Анна", R.drawable.user1))
+                    userState = UserState.Success(User(1, "Анна", null))
                 )
                 HorizontalDivider()
 
