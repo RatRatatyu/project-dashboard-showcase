@@ -8,8 +8,10 @@ import com.example.projectdashboardshowcase.core.domain.usecase.GetDashboardUseC
 import com.example.projectdashboardshowcase.core.domain.usecase.GetUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
@@ -37,7 +39,7 @@ sealed interface ContentState {
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getDashboardUseCase: GetDashboardUseCase,
-    private val getUserUseCase: GetUserUseCase
+    getUserUseCase: GetUserUseCase
 ) : ViewModel() {
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -83,5 +85,13 @@ class MainViewModel @Inject constructor(
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = MainUiState()
         )
+
+
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
+
+    fun onSearchQueryChanged(query: String) {
+        _searchQuery.value = query
+    }
 
 }
