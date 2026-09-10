@@ -10,6 +10,10 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,6 +30,8 @@ fun ActiveProjectsCard(
     modifier: Modifier = Modifier,
     projectInFocus: ProjectInFocus,
 ) {
+    var showDialog by remember { mutableStateOf(false) }
+
     Card(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(24.dp),
@@ -36,7 +42,8 @@ fun ActiveProjectsCard(
             imageUrl = projectInFocus.imageUrl,
             process = projectInFocus.process,
             categoryHub = projectInFocus.categoryHub,
-            dueDate = projectInFocus.dueDate
+            dueDate = projectInFocus.dueDate,
+            onEditClick = { showDialog = true }
         )
 
         LowerCardPart(
@@ -50,6 +57,13 @@ fun ActiveProjectsCard(
             linkedUsers = projectInFocus.linkedUsers,
             useTool = projectInFocus.useTool
         )
+
+        if (showDialog) {
+            EditProjectDialog(
+                userCount = projectInFocus.linkedUsers.size,
+                onDismiss = { showDialog = false }
+            )
+        }
 
 
     }
