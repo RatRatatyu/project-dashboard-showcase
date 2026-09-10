@@ -21,7 +21,8 @@ import javax.inject.Inject
 
 data class MainUiState(
     val userState: UserState = UserState.Loading,
-    val contentState: ContentState = ContentState.Loading
+    val contentState: ContentState = ContentState.Loading,
+
 )
 
 sealed interface UserState {
