@@ -17,7 +17,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.Business
-import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
@@ -48,7 +48,8 @@ fun UpperCardPart(
     imageUrl: Int?,
     process: String,
     categoryHub: String,
-    dueDate: LocalDate
+    dueDate: LocalDate,
+    onEditClick: () -> Unit
 ){
     val hasImage = imageUrl != null
     Box(
@@ -125,7 +126,7 @@ fun UpperCardPart(
                     )
                 }
                 FilledIconButton(
-                    onClick = {},
+                    onClick = onEditClick,
                     modifier = Modifier.size(36.dp),
 
                     colors = IconButtonDefaults.filledIconButtonColors(
@@ -134,7 +135,7 @@ fun UpperCardPart(
                     )
                 ) {
                     Icon(
-                        Icons.Default.Menu,
+                        Icons.Default.MoreHoriz,
                         contentDescription = null,
                         modifier = Modifier.size(20.dp)
                     )
