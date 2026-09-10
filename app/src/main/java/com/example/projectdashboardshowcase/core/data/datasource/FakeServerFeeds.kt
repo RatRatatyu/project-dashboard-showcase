@@ -46,7 +46,7 @@ val data: List<DashboardData> = listOf(
             taskDone = 42,
             prMerged = 14,
             bugs = 3,
-            linkedUsers = listOf(userAnna, userAlex, userMaria, userIvan, userElena),
+            linkedUsers = listOf(userIvan, userAlex, userMaria, userElena),
             useTool = listOf("React Native", "WebGL", "BIM v2.4")
         ),
         infrastructureAndService = sharedDesignSystem,
