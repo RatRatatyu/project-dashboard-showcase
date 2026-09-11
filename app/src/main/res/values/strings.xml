@@ -33,4 +33,10 @@
     <string name="menu_delete">Удалить проект</string>
     <string name="search_by_filters">Поиск по фильтрам</string>
     <string name="default_searchbar_text">Поиск по проектам, тикетам и тегам</string>
+    <string name="infrastructure_and_services">Инфраструктуры и сервисы</string>
+    <string name="component">компонента</string>
+    <string name="covering">покрытие</string>
+    <string name="review">ревью</string>
+    <string name="continue_button">Продолжить</string>
+    <string name="share_info">Поделиться</string>
 </resources>
