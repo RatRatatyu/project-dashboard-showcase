@@ -17,7 +17,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.filled.IncompleteCircle
+import androidx.compose.material.icons.filled.DonutLarge
 import androidx.compose.material.icons.filled.InsertChartOutlined
 import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material3.Button
@@ -92,7 +92,7 @@ fun LowerCardPart(
                     horizontalArrangement = Arrangement.Start
                 ){
                     Icon(
-                        imageVector = Icons.Default.IncompleteCircle,
+                        imageVector = Icons.Default.DonutLarge,
                         contentDescription = stringResource(R.string.sprint_execution),
                         modifier = Modifier
                             .padding(horizontal = 5.dp),
