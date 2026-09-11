@@ -1,5 +1,7 @@
 package com.example.projectdashboardshowcase.presentation.mainScreen
 
+import android.content.Intent
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Layers
 import androidx.compose.material.icons.filled.Stars
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -20,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,6 +38,7 @@ import com.example.projectdashboardshowcase.core.domain.model.User
 import com.example.projectdashboardshowcase.presentation.mainScreen.components.ActiveUserSprints
 import com.example.projectdashboardshowcase.presentation.mainScreen.components.DashboardSearchBar
 import com.example.projectdashboardshowcase.presentation.mainScreen.components.DashboardTopAppBar
+import com.example.projectdashboardshowcase.presentation.mainScreen.components.infrastructureCard.InfrastructureCard
 import com.example.projectdashboardshowcase.presentation.mainScreen.components.projectCard.ActiveProjectsCard
 import com.example.projectdashboardshowcase.ui.theme.ProjectDashboardShowcaseTheme
 import java.time.LocalDate
@@ -66,6 +71,7 @@ fun MainScreenComponent(
 ){
     val userState = uiState.userState
     val contentState = uiState.contentState
+    val context = LocalContext.current
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -76,7 +82,8 @@ fun MainScreenComponent(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding),
-            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(horizontal = 16.dp),
         ) {
             item {
                 Text(
@@ -106,14 +113,13 @@ fun MainScreenComponent(
                     }
                     item{
                         DashboardSearchBar(
-                            Modifier.padding(vertical = 10.dp),
                             query = searchQuery,
                             onQueryChange = {string -> onQueryChange(string)}
                         )
                     }
                     item{
                         Row(
-                            modifier = Modifier.padding(horizontal = 10.dp)
+                            modifier = Modifier
                         ){
                             Icon(
                                 imageVector = Icons.Default.Stars,
@@ -128,6 +134,36 @@ fun MainScreenComponent(
                     item {
                         ActiveProjectsCard(
                             projectInFocus = contentState.content.projectInFocus,
+                        )
+                    }
+                    item{
+                        Row(
+                            modifier = Modifier
+                        ){
+                            Icon(
+                                imageVector = Icons.Default.Layers,
+                                contentDescription = stringResource(R.string.infrastructure_and_services)
+                            )
+                            Text(
+                                text = stringResource(R.string.infrastructure_and_services),
+                                modifier = Modifier.padding(start = 5.dp)
+                            )
+                        }
+                    }
+                    item {
+                        InfrastructureCard(
+                            infrastructureAndService = contentState.content.infrastructureAndService,
+                            onShareClick = {
+                                val sendIntent = Intent().apply {
+                                    action = Intent.ACTION_SEND
+                                    putExtra(Intent.EXTRA_TEXT, "Check this out: https://google.com")
+                                    type = "text/plain"
+                                }
+                                val shareIntent = Intent.createChooser(sendIntent, null)
+                                runCatching {
+                                    context.startActivity(shareIntent)
+                                }
+                            }
                         )
                     }
 
@@ -156,7 +192,11 @@ fun ProjectCardSkeleton(modifier: Modifier = Modifier){
 }
 
 
-@Preview(showBackground = true)
+@Preview(
+    showBackground = true,
+    heightDp = 1500,
+    widthDp = 400
+)
 @Composable
 fun MainScreenComponentPreview() {
     val mockUsers = listOf(
