@@ -29,8 +29,7 @@ fun ActiveUserSprints(
 ){
     val hasActiveSprints = activeSprintCount != 0
     Card(
-        modifier
-            .padding(top = 10.dp),
+        modifier,
         shape = CircleShape,
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
