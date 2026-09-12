@@ -44,8 +44,6 @@ fun DashboardTopAppBar(
 ){
     Surface(
         modifier = modifier.fillMaxWidth(),
-        color = MaterialTheme.colorScheme.surface,
-        tonalElevation = 3.dp
     ) {
         Row(
             modifier = Modifier
