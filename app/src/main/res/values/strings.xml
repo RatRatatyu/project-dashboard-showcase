@@ -7,7 +7,7 @@
     <string name="loading_profile">Загрузка профиля...</string>
     <string name="user_greeting">Добрый день, %1$s</string>
     <string name="error_loading_profile">Не удалось загрузить</string>
-    <string name="active_sprints">%1$d активных спринта</string>
+    <string name="active_sprints">%1$d активных спринта</string> //!!
     <string name="no_active_sprints">Нету активных спринтов</string>
     <string name="tasks">Задачи</string>
     <string name="rp_merged">RP merged</string>
@@ -39,4 +39,25 @@
     <string name="review">ревью</string>
     <string name="continue_button">Продолжить</string>
     <string name="share_info">Поделиться</string>
+    <string name="quick_tasks">Быстрые задачи</string>
+
+    <plurals name="months_remaining">
+        <item quantity="one">Через %d месяц</item>
+        <item quantity="few">Через %d месяца</item>
+        <item quantity="many">Через %d месяцев</item>
+        <item quantity="other">Через %d месяцев</item>
+    </plurals>
+
+    <plurals name="days_remaining">
+        <item quantity="one">Остался %d день</item>
+        <item quantity="few">Осталось %d дня</item>
+        <item quantity="many">Осталось %d дней</item>
+        <item quantity="other">Осталось %d дней</item>
+    </plurals>
+
+    <string name="today">Сегодня</string>
+    <string name="tomorrow">Завтра</string>
+    <string name="overdue">Просрочено</string>
+    <string name="task_done">Завершено</string>
+    <string name="appointed_tasks">%1$d начначено</string>
 </resources>
