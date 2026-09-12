@@ -8,6 +8,7 @@ import com.example.projectdashboardshowcase.core.domain.model.QuickTask
 import com.example.projectdashboardshowcase.core.domain.model.TaskPriority
 import com.example.projectdashboardshowcase.core.domain.model.User
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 // Here we fake server feed
 private val userAnna = User(100, "Анна", R.drawable.user1)
@@ -56,7 +57,7 @@ val data: List<DashboardData> = listOf(
                 title = "Оптимизировать шейдеры освещения",
                 isCompleted = false,
                 priority = TaskPriority.P1,
-                dueDate = "Сегодня, 18:00",
+                dueDate = LocalDateTime.of(2026,9,15,15,0),
                 category = "Павильон инноваций"
             ),
             QuickTask(
@@ -64,7 +65,7 @@ val data: List<DashboardData> = listOf(
                 title = "Синхронизировать токены Tailwind",
                 isCompleted = true,
                 priority = TaskPriority.P2,
-                dueDate = "Завершено",
+                dueDate = LocalDateTime.of(2026,9,10,10,0),
                 category = "Дизайн-система"
             ),
             QuickTask(
@@ -72,7 +73,7 @@ val data: List<DashboardData> = listOf(
                 title = "Ревью PR #182: Проверка откликов",
                 isCompleted = false,
                 priority = TaskPriority.P3,
-                dueDate = "Завтра, 12:30",
+                dueDate = LocalDateTime.of(2026,9,12,9,0),
                 category = "Телеметрия BIM"
             )
         )
@@ -104,7 +105,7 @@ val data: List<DashboardData> = listOf(
                 title = "Настроить CI/CD пайплайн для WebGL",
                 isCompleted = false,
                 priority = TaskPriority.P1,
-                dueDate = "Сегодня, 19:00",
+                dueDate = LocalDateTime.of(2026,10,15,15,0),
                 category = "Инфраструктура"
             ),
             QuickTask(
@@ -112,7 +113,7 @@ val data: List<DashboardData> = listOf(
                 title = "Провести профилирование памяти",
                 isCompleted = true,
                 priority = TaskPriority.P2,
-                dueDate = "Завершено",
+                dueDate = LocalDateTime.of(2026,9,15,15,0),
                 category = "Павильон инноваций"
             )
         )
@@ -156,7 +157,7 @@ val data: List<DashboardData> = listOf(
                 title = "Обновить API эндпоинты для телеметрии",
                 isCompleted = false,
                 priority = TaskPriority.P1,
-                dueDate = "Завтра, 10:00",
+                dueDate = LocalDateTime.of(2026,8,15,15,0),
                 category = "Телеметрия BIM"
             )
         )
