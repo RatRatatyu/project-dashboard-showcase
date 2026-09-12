@@ -4,12 +4,15 @@ import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Checklist
 import androidx.compose.material.icons.filled.Layers
 import androidx.compose.material.icons.filled.Stars
 import androidx.compose.material3.Card
@@ -23,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,6 +37,7 @@ import com.example.projectdashboardshowcase.R
 import com.example.projectdashboardshowcase.core.domain.model.DashboardData
 import com.example.projectdashboardshowcase.core.domain.model.InfrastructureAndService
 import com.example.projectdashboardshowcase.core.domain.model.ProjectInFocus
+import com.example.projectdashboardshowcase.core.domain.model.QuickTask
 import com.example.projectdashboardshowcase.core.domain.model.TaskPriority
 import com.example.projectdashboardshowcase.core.domain.model.User
 import com.example.projectdashboardshowcase.presentation.mainScreen.components.ActiveUserSprints
@@ -40,8 +45,11 @@ import com.example.projectdashboardshowcase.presentation.mainScreen.components.D
 import com.example.projectdashboardshowcase.presentation.mainScreen.components.DashboardTopAppBar
 import com.example.projectdashboardshowcase.presentation.mainScreen.components.infrastructureCard.InfrastructureCard
 import com.example.projectdashboardshowcase.presentation.mainScreen.components.projectCard.ActiveProjectsCard
+import com.example.projectdashboardshowcase.presentation.mainScreen.components.quickTaskCard.QuickTaskCard
+import com.example.projectdashboardshowcase.presentation.mainScreen.components.quickTaskCard.toUiModel
 import com.example.projectdashboardshowcase.ui.theme.ProjectDashboardShowcaseTheme
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -76,7 +84,6 @@ fun MainScreenComponent(
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = { DashboardTopAppBar(userState = userState) },
-        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
     ) {innerPadding ->
         LazyColumn(
             modifier = Modifier
@@ -118,18 +125,10 @@ fun MainScreenComponent(
                         )
                     }
                     item{
-                        Row(
-                            modifier = Modifier
-                        ){
-                            Icon(
-                                imageVector = Icons.Default.Stars,
-                                contentDescription = stringResource(R.string.current_project_in_focus)
-                            )
-                            Text(
-                                text = stringResource(R.string.current_project_in_focus),
-                                modifier = Modifier.padding(start = 5.dp)
-                            )
-                        }
+                        TitleForContentCards(
+                            icon = Icons.Default.Stars,
+                            title = stringResource(R.string.current_project_in_focus)
+                        )
                     }
                     item {
                         ActiveProjectsCard(
@@ -137,18 +136,10 @@ fun MainScreenComponent(
                         )
                     }
                     item{
-                        Row(
-                            modifier = Modifier
-                        ){
-                            Icon(
-                                imageVector = Icons.Default.Layers,
-                                contentDescription = stringResource(R.string.infrastructure_and_services)
-                            )
-                            Text(
-                                text = stringResource(R.string.infrastructure_and_services),
-                                modifier = Modifier.padding(start = 5.dp)
-                            )
-                        }
+                        TitleForContentCards(
+                            icon = Icons.Default.Layers,
+                            title = stringResource(R.string.infrastructure_and_services)
+                        )
                     }
                     item {
                         InfrastructureCard(
@@ -156,7 +147,7 @@ fun MainScreenComponent(
                             onShareClick = {
                                 val sendIntent = Intent().apply {
                                     action = Intent.ACTION_SEND
-                                    putExtra(Intent.EXTRA_TEXT, "Check this out: https://google.com")
+                                    putExtra(Intent.EXTRA_TEXT, "https://google.com")
                                     type = "text/plain"
                                 }
                                 val shareIntent = Intent.createChooser(sendIntent, null)
@@ -166,10 +157,23 @@ fun MainScreenComponent(
                             }
                         )
                     }
-
-
+                    item {
+                        TitleForContentCards(
+                            icon = Icons.Default.Checklist,
+                            title = stringResource(R.string.quick_tasks),
+                            subTitle = stringResource(
+                                R.string.appointed_tasks,
+                                contentState.content.quickTasks.size
+                            )
+                        )
+                    }
+                    items(
+                        items = contentState.content.quickTasks,
+                        key = { it.id }
+                    ) { task ->
+                        QuickTaskCard(uiModel = task.toUiModel())
+                    }
                 }
-
                 is ContentState.Error ->{}
                     //TODO
             }
@@ -177,6 +181,37 @@ fun MainScreenComponent(
     }
 }
 
+@Composable
+fun TitleForContentCards(
+    modifier: Modifier = Modifier,
+    icon: ImageVector,
+    title: String,
+    subTitle: String? = null
+){
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(top = 5.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ){
+        Icon(
+            imageVector = icon,
+            contentDescription = title
+        )
+        Text(
+            text = title,
+            modifier = Modifier.padding(start = 5.dp)
+        )
+        Spacer(Modifier.weight(1f))
+
+        subTitle?.let {
+            Text(
+                text = subTitle,
+                modifier = Modifier.padding(end = 5.dp)
+            )
+        }
+    }
+}
 
 @Composable
 fun ProjectCardSkeleton(modifier: Modifier = Modifier){
@@ -194,7 +229,7 @@ fun ProjectCardSkeleton(modifier: Modifier = Modifier){
 
 @Preview(
     showBackground = true,
-    heightDp = 1500,
+    heightDp = 2000,
     widthDp = 400
 )
 @Composable
@@ -234,12 +269,38 @@ fun MainScreenComponentPreview() {
         covering = 0.994f,
         review = 12
     )
+    val mockQuickTask = listOf(
+    QuickTask(
+        id = 1,
+        title = "Оптимизировать шейдеры освещения",
+        isCompleted = false,
+        priority = TaskPriority.P1,
+        dueDate = LocalDateTime.of(2026,9,15,15,0),
+        category = "Павильон инноваций"
+    ),
+    QuickTask(
+        id = 2,
+        title = "Синхронизировать токены Tailwind",
+        isCompleted = true,
+        priority = TaskPriority.P2,
+        dueDate = LocalDateTime.of(2026,9,10,10,0),
+        category = "Дизайн-система"
+    ),
+    QuickTask(
+        id = 3,
+        title = "Ревью PR #182: Проверка откликов",
+        isCompleted = false,
+        priority = TaskPriority.P3,
+        dueDate = LocalDateTime.of(2026,9,12,9,0),
+        category = "Телеметрия BIM"
+    )
+    )
     val mockDashboard = DashboardData(
         userId = 100,
         activeSprintCount = 3,
         projectInFocus = mockProject,
         infrastructureAndService = mockService,
-        quickTasks = emptyList()
+        quickTasks = mockQuickTask
     )
 
     ProjectDashboardShowcaseTheme {
