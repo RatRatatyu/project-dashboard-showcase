@@ -83,7 +83,7 @@ fun LowerInfrastructureCard(
                 InfrastructureInfoBlueprint(
                     modifier = Modifier.weight(1f),
                     icon = Icons.Outlined.Verified,
-                    info = "${(covering * 100).toInt()}%",
+                    info = "${(covering * 100)}%",
                     title = stringResource(R.string.covering)
                 )
                 InfrastructureInfoBlueprint(
