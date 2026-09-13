@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.Business
 import androidx.compose.material.icons.filled.MoreHoriz
@@ -36,9 +37,11 @@ import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.projectdashboardshowcase.R
 import com.example.projectdashboardshowcase.presentation.mainScreen.utils.getDaysRemainingText
+import com.example.projectdashboardshowcase.ui.theme.ProjectDashboardShowcaseTheme
 import java.time.LocalDate
 import java.time.format.TextStyle
 
@@ -46,10 +49,12 @@ import java.time.format.TextStyle
 fun UpperCardPart(
     modifier: Modifier = Modifier,
     imageUrl: Int?,
+    isBookmarked: Boolean,
     process: String,
     categoryHub: String,
     dueDate: LocalDate,
-    onEditClick: () -> Unit
+    onEditClick: () -> Unit,
+    onProjectToggle: () -> Unit
 ){
     val hasImage = imageUrl != null
     Box(
@@ -111,7 +116,7 @@ fun UpperCardPart(
 
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 FilledIconButton(
-                    onClick = {},
+                    onClick = onProjectToggle,
                     modifier = Modifier.size(36.dp),
 
                     colors = IconButtonDefaults.filledIconButtonColors(
@@ -120,7 +125,7 @@ fun UpperCardPart(
                     )
                 ) {
                     Icon(
-                        Icons.Default.BookmarkBorder,
+                        if(isBookmarked) Icons.Filled.Bookmark else Icons.Default.BookmarkBorder,
                         contentDescription = null,
                         modifier = Modifier.size(20.dp)
                     )
@@ -210,5 +215,22 @@ fun UpperCardPart(
                 }
             }
         }
+    }
+}
+
+
+@Preview
+@Composable
+fun UpperPreview(){
+    ProjectDashboardShowcaseTheme{
+        UpperCardPart(
+            imageUrl = R.drawable.projectinfocus1,
+            isBookmarked = true,
+            process = "В процессе",
+            categoryHub = "Архитектурный хаб • Фронтенд & BIM",
+            dueDate= LocalDate.of(2026, 9, 15),
+            onEditClick = {},
+            onProjectToggle = {}
+        )
     }
 }
