@@ -16,6 +16,7 @@ import com.example.projectdashboardshowcase.presentation.mainScreen.utils.getDay
 import java.time.LocalDate
 
 data class QuickTaskUiModel(
+    val id: Int,
     val title: String,
     val statusText: String,
     val statusIcon: ImageVector,
@@ -24,7 +25,6 @@ data class QuickTaskUiModel(
     val priorityLabel: String,
     val priorityColor: Color,
     val isCompleted: Boolean,
-    val isEnabled: Boolean,
     val showStrikethrough: Boolean
 )
 
@@ -64,6 +64,7 @@ fun QuickTask.toUiModel(): QuickTaskUiModel {
     }
 
     return QuickTaskUiModel(
+        id = id,
         title = title,
         statusText = statusText,
         statusIcon = statusIcon,
@@ -75,7 +76,6 @@ fun QuickTask.toUiModel(): QuickTaskUiModel {
             TaskPriority.P2, TaskPriority.P3 -> theme.primaryContainer
         },
         isCompleted = isCompleted,
-        isEnabled = !isCompleted,
         showStrikethrough = isCompleted
     )
 }
