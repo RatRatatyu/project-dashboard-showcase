@@ -63,7 +63,8 @@ fun MainScreen(
     MainScreenComponent(
         uiState = uiState,
         searchQuery = searchQuery,
-        onQueryChange = {string -> viewModel.onSearchQueryChanged(string)}
+        onQueryChange = {string -> viewModel.onSearchQueryChanged(string)},
+        onProjectToggle = { viewModel.onToggleBookMark() }
     )
 
     
@@ -74,7 +75,8 @@ fun MainScreenComponent(
     modifier: Modifier = Modifier,
     uiState: MainUiState,
     searchQuery: String,
-    onQueryChange: (String) -> Unit
+    onQueryChange: (String) -> Unit,
+    onProjectToggle: () -> Unit
 
 ){
     val userState = uiState.userState
@@ -133,6 +135,7 @@ fun MainScreenComponent(
                     item {
                         ActiveProjectsCard(
                             projectInFocus = contentState.content.projectInFocus,
+                            onProjectToggle = onProjectToggle
                         )
                     }
                     item{
@@ -244,6 +247,7 @@ fun MainScreenComponentPreview() {
     val mockProject = ProjectInFocus(
         id = 1,
         imageUrl = R.drawable.projectinfocus1,
+        isBookmarked = false,
         dueDate = LocalDate.of(2026, 9, 15),
         categoryHub = "Архитектурный хаб • Фронтенд & BIM",
         name = "Реконструкция павильона цифровых иноваций",
@@ -311,7 +315,8 @@ fun MainScreenComponentPreview() {
                     contentState = ContentState.Success(mockDashboard),
                     ),
                 searchQuery = "",
-                onQueryChange = {  }
+                onQueryChange = {  },
+                onProjectToggle = {}
             )
         }
     }
