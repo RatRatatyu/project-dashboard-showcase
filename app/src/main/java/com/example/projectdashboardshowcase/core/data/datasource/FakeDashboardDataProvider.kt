@@ -32,4 +32,26 @@ object FakeDashboardDataProvider {
         }
         Log.i("UPDATE_CHECK", "isBooked update to $state")
     }
+
+    fun taskCheckDone(taskId: Int, userId: Int){
+        val currentList = _localData.value.toMutableList()
+
+        val index = currentList.indexOfFirst { it.userId == userId }
+        if (index == -1) return
+
+
+        val  updatedList = currentList[index].quickTasks.map { task->
+            if (task.id == taskId){
+                task.copy(isCompleted = !task.isCompleted)
+            }else{
+                task
+            }
+        }
+        currentList[index] = currentList[index].copy(
+            quickTasks = updatedList
+        )
+
+        _localData.value = currentList
+        Log.i("UPDATE_CHECK", "task $taskId")
+    }
 }
