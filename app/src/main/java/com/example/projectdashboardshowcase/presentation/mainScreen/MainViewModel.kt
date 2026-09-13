@@ -6,6 +6,7 @@ import com.example.projectdashboardshowcase.core.domain.model.DashboardData
 import com.example.projectdashboardshowcase.core.domain.model.User
 import com.example.projectdashboardshowcase.core.domain.usecase.GetDashboardUseCase
 import com.example.projectdashboardshowcase.core.domain.usecase.GetUserUseCase
+import com.example.projectdashboardshowcase.core.domain.usecase.TaskCheckUseCase
 import com.example.projectdashboardshowcase.core.domain.usecase.ToggleBookmarkUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -42,7 +43,8 @@ sealed interface ContentState {
 class MainViewModel @Inject constructor(
     private val getDashboardUseCase: GetDashboardUseCase,
     getUserUseCase: GetUserUseCase,
-    private val toggleBookmarkUseCase: ToggleBookmarkUseCase
+    private val toggleBookmarkUseCase: ToggleBookmarkUseCase,
+    private val taskCheckUseCase: TaskCheckUseCase
 ) : ViewModel() {
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -104,6 +106,15 @@ class MainViewModel @Inject constructor(
             val userId = currentState.userState.user.id
             val toggleValue = !currentState.contentState.content.projectInFocus.isBookmarked
             toggleBookmarkUseCase(toggleValue, userId)
+        }
+    }
+
+    fun onTaskDone(taskId: Int){
+        val currentState = uiState.value
+
+        if (currentState.userState is UserState.Success && currentState.contentState is ContentState.Success) {
+            val userId = currentState.userState.user.id
+            taskCheckUseCase(taskId, userId)
         }
     }
 
