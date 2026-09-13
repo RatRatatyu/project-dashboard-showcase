@@ -64,7 +64,8 @@ fun MainScreen(
         uiState = uiState,
         searchQuery = searchQuery,
         onQueryChange = {string -> viewModel.onSearchQueryChanged(string)},
-        onProjectToggle = { viewModel.onToggleBookMark() }
+        onProjectToggle = { viewModel.onToggleBookMark() },
+        onTaskDone = {taskId -> viewModel.onTaskDone(taskId)}
     )
 
     
@@ -76,7 +77,8 @@ fun MainScreenComponent(
     uiState: MainUiState,
     searchQuery: String,
     onQueryChange: (String) -> Unit,
-    onProjectToggle: () -> Unit
+    onProjectToggle: () -> Unit,
+    onTaskDone: (Int) -> Unit
 
 ){
     val userState = uiState.userState
@@ -174,7 +176,10 @@ fun MainScreenComponent(
                         items = contentState.content.quickTasks,
                         key = { it.id }
                     ) { task ->
-                        QuickTaskCard(uiModel = task.toUiModel())
+                        QuickTaskCard(
+                            uiModel = task.toUiModel(),
+                            onTaskDone = onTaskDone
+                        )
                     }
                 }
                 is ContentState.Error ->{}
@@ -316,7 +321,8 @@ fun MainScreenComponentPreview() {
                     ),
                 searchQuery = "",
                 onQueryChange = {  },
-                onProjectToggle = {}
+                onProjectToggle = {},
+                onTaskDone = {}
             )
         }
     }
