@@ -5,6 +5,7 @@ import java.time.LocalDate
 data class ProjectInFocus (
     val id: Int,
     val imageUrl: Int? = null,
+    val isBookmarked: Boolean,
     val dueDate: LocalDate,
     val categoryHub: String,
     val name: String,
