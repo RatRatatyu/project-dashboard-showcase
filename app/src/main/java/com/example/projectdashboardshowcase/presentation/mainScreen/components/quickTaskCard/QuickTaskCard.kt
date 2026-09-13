@@ -41,7 +41,8 @@ import java.time.LocalDateTime
 @Composable
 fun QuickTaskCard(
     modifier: Modifier = Modifier,
-    uiModel: QuickTaskUiModel
+    uiModel: QuickTaskUiModel,
+    onTaskDone: (Int) -> Unit
 ) {
     Card(
         shape = RoundedCornerShape(16.dp),
@@ -51,7 +52,7 @@ fun QuickTaskCard(
         modifier = modifier
             .fillMaxWidth()
             .alpha(if (uiModel.isCompleted) 0.6f else 1f)
-            .clickable(enabled = uiModel.isEnabled, onClick = {}),
+            .clickable(onClick = { onTaskDone(uiModel.id) }),
     ) {
         Row(
             modifier = Modifier
@@ -62,9 +63,8 @@ fun QuickTaskCard(
             // Checkbox
             Checkbox(
                 checked = uiModel.isCompleted,
-                onCheckedChange = { /* TODO */ },
+                onCheckedChange = { onTaskDone(uiModel.id) },
                 modifier = Modifier.size(24.dp),
-                enabled = uiModel.isEnabled,
                 colors = CheckboxDefaults.colors(
                     checkedColor = MaterialTheme.colorScheme.primary,
                     checkmarkColor = MaterialTheme.colorScheme.onPrimary,
@@ -166,13 +166,13 @@ fun QuickTaskPreview() {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text("Active (Today)", style = MaterialTheme.typography.labelSmall)
-            QuickTaskCard(uiModel = mockTask.toUiModel())
+            QuickTaskCard(uiModel = mockTask.toUiModel(), onTaskDone = {})
             
             Text("Completed", style = MaterialTheme.typography.labelSmall)
-            QuickTaskCard(uiModel = mockTask.copy(isCompleted = true).toUiModel())
+            QuickTaskCard(uiModel = mockTask.copy(isCompleted = true).toUiModel(), onTaskDone = {})
 
             Text("Upcoming", style = MaterialTheme.typography.labelSmall)
-            QuickTaskCard(uiModel = mockTask.copy(dueDate = LocalDateTime.now().plusDays(5)).toUiModel())
+            QuickTaskCard(uiModel = mockTask.copy(dueDate = LocalDateTime.now().plusDays(5)).toUiModel(), onTaskDone = {})
         }
     }
 }
