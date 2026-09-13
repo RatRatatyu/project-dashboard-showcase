@@ -6,6 +6,7 @@ import com.example.projectdashboardshowcase.core.domain.model.DashboardData
 import com.example.projectdashboardshowcase.core.domain.model.User
 import com.example.projectdashboardshowcase.core.domain.usecase.GetDashboardUseCase
 import com.example.projectdashboardshowcase.core.domain.usecase.GetUserUseCase
+import com.example.projectdashboardshowcase.core.domain.usecase.ToggleBookmarkUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -40,7 +41,8 @@ sealed interface ContentState {
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getDashboardUseCase: GetDashboardUseCase,
-    getUserUseCase: GetUserUseCase
+    getUserUseCase: GetUserUseCase,
+    private val toggleBookmarkUseCase: ToggleBookmarkUseCase
 ) : ViewModel() {
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -93,6 +95,16 @@ class MainViewModel @Inject constructor(
 
     fun onSearchQueryChanged(query: String) {
         _searchQuery.value = query
+    }
+
+    fun onToggleBookMark(){
+        val currentState = uiState.value
+
+        if (currentState.userState is UserState.Success && currentState.contentState is ContentState.Success) {
+            val userId = currentState.userState.user.id
+            val toggleValue = !currentState.contentState.content.projectInFocus.isBookmarked
+            toggleBookmarkUseCase(toggleValue, userId)
+        }
     }
 
 }
