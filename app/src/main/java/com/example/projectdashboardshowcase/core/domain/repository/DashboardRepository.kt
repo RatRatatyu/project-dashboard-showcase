@@ -7,4 +7,5 @@ interface DashboardRepository {
 
     fun getDashboardData(userId: Int): Flow<DashboardData>
     fun toggleProjectBookedState(bookedState: Boolean, userId: Int)
+    fun taskCheckDone(taskId: Int, userId: Int)
 }
