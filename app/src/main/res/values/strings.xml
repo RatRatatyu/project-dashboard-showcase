@@ -4,7 +4,7 @@
     <string name="app_logo">App Logo</string>
     <string name="user_avatar">Аватар пользователя</string>
     <string name="error_loading_user_avatar">Ошибка загрузки аватара</string>
-    <string name="loading_profile">Загрузка профиля...</string>
+    <string name="loading_profile">Загрузка профиля…</string>
     <string name="user_greeting">Добрый день, %1$s</string>
     <string name="error_loading_profile">Не удалось загрузить</string>
     <string name="active_sprints">%1$d активных спринта</string> //!!
