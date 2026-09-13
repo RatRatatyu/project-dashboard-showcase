@@ -6,6 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface DashboardRepository {
 
     fun getDashboardData(userId: Int): Flow<DashboardData>
-    fun updateData()
-
+    fun toggleProjectBookedState(bookedState: Boolean, userId: Int)
 }
