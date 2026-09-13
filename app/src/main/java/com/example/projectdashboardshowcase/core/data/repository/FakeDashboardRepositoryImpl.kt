@@ -5,21 +5,21 @@ import com.example.projectdashboardshowcase.core.domain.model.DashboardData
 import com.example.projectdashboardshowcase.core.domain.repository.DashboardRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
-import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
 class FakeDashboardRepositoryImpl @Inject constructor(): DashboardRepository {
 
     override fun getDashboardData(userId: Int): Flow<DashboardData> =
-        flow{
-            delay(1.seconds)
-            emit(FakeDashboardDataProvider.getMockData(userId))
-        }
+        FakeDashboardDataProvider.observeMockData(userId)
+            .onStart {
+                delay(1.seconds)
+            }
 
 
-    override fun updateData() {
-        //TODO
+    override fun toggleProjectBookedState(bookedState: Boolean, userId: Int){
+        FakeDashboardDataProvider.toggleState(bookedState, userId)
+
     }
 }
