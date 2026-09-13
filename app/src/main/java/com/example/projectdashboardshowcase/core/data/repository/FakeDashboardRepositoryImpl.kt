@@ -20,6 +20,9 @@ class FakeDashboardRepositoryImpl @Inject constructor(): DashboardRepository {
 
     override fun toggleProjectBookedState(bookedState: Boolean, userId: Int){
         FakeDashboardDataProvider.toggleState(bookedState, userId)
+    }
 
+    override fun taskCheckDone(taskId: Int, userId: Int) {
+        FakeDashboardDataProvider.taskCheckDone(taskId, userId)
     }
 }
