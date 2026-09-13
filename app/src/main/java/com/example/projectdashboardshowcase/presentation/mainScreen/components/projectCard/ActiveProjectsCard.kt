@@ -27,6 +27,7 @@ import java.time.LocalDate
 fun ActiveProjectsCard(
     modifier: Modifier = Modifier,
     projectInFocus: ProjectInFocus,
+    onProjectToggle: () -> Unit
 ) {
     var showDialog by remember { mutableStateOf(false) }
 
@@ -40,7 +41,9 @@ fun ActiveProjectsCard(
             process = projectInFocus.process,
             categoryHub = projectInFocus.categoryHub,
             dueDate = projectInFocus.dueDate,
-            onEditClick = { showDialog = true }
+            onEditClick = { showDialog = true },
+            isBookmarked = projectInFocus.isBookmarked,
+            onProjectToggle = onProjectToggle
         )
 
         LowerCardPart(
@@ -79,6 +82,7 @@ fun ProjectCardPreview(){
     val mockProject = ProjectInFocus(
         id = 1,
         imageUrl = R.drawable.projectinfocus1,
+        isBookmarked = false,
         dueDate = LocalDate.of(2026, 9, 15),
         categoryHub = "Архитектурный хаб • Фронтенд & BIM",
         name = "Реконструкция павильона цифровых иноваций",
@@ -102,6 +106,7 @@ fun ProjectCardPreview(){
             ) {
             ActiveProjectsCard(
                 projectInFocus = mockProject,
+                onProjectToggle = {}
             )
         }
     }
